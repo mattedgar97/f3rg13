@@ -6,7 +6,7 @@ export default function Title() {
       <div className="max-w-site mx-auto">
         <div className="neon-panel p-8 lg:p-12 text-center">
           {/* Main title */}
-          <h1 className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl tracking-tighter leading-none text-neon uppercase">
+          <h1 className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl tracking-tight leading-none text-neon uppercase">
             {SITE_CONFIG.djName}
           </h1>
 
