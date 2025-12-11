@@ -1,68 +1,243 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap');
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
   }
-  a:hover {
-    color: #747bff;
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-  button {
-    background-color: #f9f9f9;
+
+  body {
+    margin: 0;
+    font-family:
+      'Inter',
+      system-ui,
+      -apple-system,
+      'Segoe UI',
+      Roboto,
+      'Helvetica Neue',
+      Arial,
+      sans-serif;
+    background-color: #c7d900;
+    color: #0a0a0a;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  /* SCANLINES - Animated CRT effect */
+  .scanlines {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    background-image: repeating-linear-gradient(
+      180deg,
+      transparent 0,
+      transparent 2px,
+      rgba(0, 0, 0, 0.15) 2px,
+      rgba(0, 0, 0, 0.15) 4px
+    );
+    animation: scan 4s linear infinite;
+  }
+
+  @keyframes scan {
+    0% {
+      opacity: 0.5;
+      transform: translateY(0);
+    }
+
+    50% {
+      opacity: 0.8;
+    }
+
+    100% {
+      opacity: 0.5;
+      transform: translateY(4px);
+    }
+  }
+
+  /* GRAIN/NOISE overlay */
+  .grain {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0.06;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+
+  /* Poster-style border */
+  .poster-border {
+    box-shadow:
+      0 0 0 3px #0a0a0a,
+      inset 0 0 0 2px rgba(0, 0, 0, 0.6);
+    border-radius: 24px;
+  }
+
+  /* Rounded panel utilities */
+  .rounded-panel {
+    border-radius: 20px;
+  }
+
+  @media (max-width: 767px) {
+    .rounded-panel {
+      border-radius: 12px;
+    }
+  }
+
+  /* Display headline style */
+  .headline-stack {
+    font-family: 'Anton', 'Oswald', 'League Spartan', sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: -0.04em;
+    line-height: 0.92;
+  }
+
+  /* Neon panel style */
+  .neon-panel {
+    background-color: #151515;
+    border: 3px solid #0a0a0a;
+    border-radius: 20px;
+    position: relative;
+  }
+
+  /* Screen scanlines for panels */
+  .screen-scanlines::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    background-image: repeating-linear-gradient(
+      180deg,
+      transparent 0,
+      rgba(0, 0, 0, 0.12) 1px,
+      transparent 2px
+    );
+    animation: panel-scan 3s ease-in-out infinite;
+  }
+
+  @keyframes panel-scan {
+    0%,
+    100% {
+      opacity: 0.6;
+    }
+
+    50% {
+      opacity: 0.85;
+    }
+  }
+
+  /* Glyph hover effect */
+  .glyph-hover {
+    transition:
+      transform 0.2s ease,
+      filter 0.2s ease;
+  }
+
+  .glyph-hover:hover {
+    transform: translateY(-3px) scale(1.02);
+    filter: blur(0.2px) saturate(1.05);
+  }
+
+  /* Social button style */
+  .social-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    background-color: transparent;
+    color: #0a0a0a;
+    border: 2px solid #0a0a0a;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease,
+      transform 0.2s ease;
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .social-btn:hover,
+  .social-btn:focus {
+    background-color: #0a0a0a;
+    color: #c7d900;
+    transform: translateY(-2px);
+  }
+
+  .social-btn:focus {
+    outline: 2px solid #0a0a0a;
+    outline-offset: 2px;
+  }
+
+  /* Gallery slot placeholder */
+  .gallery-slot {
+    aspect-ratio: 1;
+    background-color: #151515;
+    border: 2px solid #0a0a0a;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #c7d900;
+    font-size: 2rem;
+    transition: transform 0.2s ease;
+  }
+
+  .gallery-slot:hover {
+    transform: scale(1.02);
+  }
+
+  /* Shimmer text effect */
+  .shimmer-text {
+    background: linear-gradient(
+      110deg,
+      #0a0a0a 40%,
+      rgba(199, 217, 0, 0.3) 50%,
+      #0a0a0a 60%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: shimmer 8s linear infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: 200% 0;
+    }
+
+    100% {
+      background-position: -200% 0;
+    }
+  }
+}
+
+@layer utilities {
+  .text-shadow-glow {
+    text-shadow: 0 0 20px rgba(199, 217, 0, 0.4);
   }
 }
