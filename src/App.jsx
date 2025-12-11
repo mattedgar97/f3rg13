@@ -3,12 +3,12 @@ import Title from './components/Title'
 import HeroPanel from './components/HeroPanel'
 import GlyphRow from './components/GlyphRow'
 import InstagramFeed from './components/InstagramFeed'
-import SocialLinks from './components/SocialLinks'
 import Footer from './components/Footer'
+import { AudioProvider } from './contexts/AudioContext'
 
 function App() {
   return (
-    <>
+    <AudioProvider>
       {/* Global scanline overlay - on top of everything */}
       <div className="scanlines" aria-hidden="true" />
       {/* Global grain overlay */}
@@ -35,19 +35,12 @@ function App() {
               <InstagramFeed />
             </div>
           </section>
-
-          {/* Social links */}
-          <section className="w-full px-4 lg:px-8 mt-8 lg:mt-12">
-            <div className="max-w-site mx-auto">
-              <SocialLinks />
-            </div>
-          </section>
         </main>
 
         {/* Footer */}
         <Footer />
       </div>
-    </>
+    </AudioProvider>
   )
 }
 

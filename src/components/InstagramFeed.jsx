@@ -68,7 +68,7 @@ export default function InstagramFeed() {
         </a>
       </div>
 
-      <div className="flex justify-center items-start">
+      <div className="flex justify-center items-start min-h-[600px]">
         {INSTAGRAM_POST_URLS.map((postUrl) => (
           <div key={postUrl} className="w-full max-w-[500px]">
             <blockquote
@@ -80,6 +80,7 @@ export default function InstagramFeed() {
                 width: '100%',
                 maxWidth: '540px',
                 margin: '0 auto',
+                minHeight: '600px',
               }}
             />
           </div>

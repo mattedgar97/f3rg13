@@ -75,7 +75,7 @@ export default function SocialLinks() {
       <a
         href={SOCIAL_LINKS.email.url}
         className="social-btn w-full sm:w-auto justify-center"
-        aria-label="Send booking email"
+        aria-label="Send email"
       >
         <EmailIcon />
         <span>{SOCIAL_LINKS.email.label}</span>

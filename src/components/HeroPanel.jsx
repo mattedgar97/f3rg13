@@ -1,4 +1,5 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
+import { useAudio } from '../hooks/useAudio'
 
 // Add your video URL here (can be a local file in /public or external URL)
 const VIDEO_URL = '/assets/trimmed_fergie.mov' // Update this path
@@ -6,11 +7,31 @@ const VIDEO_URL = '/assets/trimmed_fergie.mov' // Update this path
 export default function HeroPanel() {
   const [isMuted, setIsMuted] = useState(true)
   const videoRef = useRef(null)
+  const { setVideoElement, getAudioContext } = useAudio()
+
+  useEffect(() => {
+    if (videoRef.current) {
+      setVideoElement(videoRef.current)
+    }
+  }, [setVideoElement])
 
   const toggleMute = () => {
     if (videoRef.current) {
+      const willUnmute = videoRef.current.muted
       videoRef.current.muted = !videoRef.current.muted
       setIsMuted(!isMuted)
+
+      // Resume AudioContext on user interaction (required by browser autoplay policy)
+      if (willUnmute && getAudioContext) {
+        getAudioContext()
+      }
+
+      // Ensure video is playing when unmuting
+      if (willUnmute && videoRef.current.paused) {
+        videoRef.current.play().catch((err) => {
+          console.error('Error playing video:', err)
+        })
+      }
     }
   }
 
@@ -26,7 +47,10 @@ export default function HeroPanel() {
           playsInline
           onClick={toggleMute}
           className="absolute inset-0 w-full h-full object-cover cursor-pointer"
-          style={{ zIndex: 0 }}
+          style={{
+            zIndex: 0,
+            objectPosition: 'center center',
+          }}
         >
           <source src={VIDEO_URL} type="video/quicktime" />
           <source src={VIDEO_URL} type="video/mp4" />

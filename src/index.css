@@ -234,6 +234,51 @@
       background-position: -200% 0;
     }
   }
+
+  /* Animated visualizer effects */
+  @keyframes wave {
+    0%,
+    100% {
+      transform: scaleY(1);
+    }
+
+    50% {
+      transform: scaleY(0.4);
+    }
+  }
+
+  .animate-wave {
+    animation: wave 1s ease-in-out infinite;
+    transform-origin: bottom;
+  }
+
+  .animate-spin-slow {
+    animation: spin 20s linear infinite;
+  }
+
+  .animate-spin-reverse {
+    animation: spin-reverse 15s linear infinite;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes spin-reverse {
+    from {
+      transform: rotate(360deg);
+    }
+
+    to {
+      transform: rotate(0deg);
+    }
+  }
 }
 
 @layer utilities {
