@@ -1,8 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { useAudio } from '../hooks/useAudio'
 
-// Add your video URL here (can be a local file in /public or external URL)
-const VIDEO_URL = '/assets/trimmed_fergie.mov' // Update this path
+const VIDEO_URL = '/assets/trimmed_fergie.mov'
 
 export default function HeroPanel() {
   const [isMuted, setIsMuted] = useState(true)

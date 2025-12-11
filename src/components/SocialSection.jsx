@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { useAudio } from '../hooks/useAudio'
 
-export default function GlyphRow() {
+export default function SocialSection() {
   const socialButtons = [
     {
       name: 'INSTAGRAM',
