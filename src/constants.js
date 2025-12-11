@@ -10,7 +10,8 @@ export const COLORS = {
 
 export const SITE_CONFIG = {
   djName: 'F3RG13',
-  tagline: 'ELIZA FERGUSON',
+  fullName: 'ELIZA FERGUSON',
+  tagline: 'DJ - UKG - SPEED GARAGE - BASSLINE - FUNKY HOUSE',
   taglineRight: 'LIVERPOOL / MANCHESTER / THE WORLD',
   copyright: `© ${new Date().getFullYear()} F3RG13`,
 }

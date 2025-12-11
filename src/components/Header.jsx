@@ -27,7 +27,7 @@ export default function Header() {
 
       {/* Center text */}
       <span className="text-ink font-medium">
-        + {SITE_CONFIG.tagline} X {SITE_CONFIG.taglineRight}
+        + {SITE_CONFIG.fullName} X {SITE_CONFIG.taglineRight}
       </span>
 
       {/* Right glyphs */}

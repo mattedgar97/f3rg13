@@ -1,153 +1,124 @@
-# F3RG13 — DJ Portfolio
+# F3RG13
 
-A high-contrast, neon poster-style DJ portfolio built with React + Vite + TailwindCSS. Features animated scanlines, grain texture overlays, bold stacked typography, and a cyber-industrial aesthetic.
+A neon-styled DJ portfolio website for Eliza Ferguson (F3RG13), featuring a bold cyber-industrial aesthetic with animated audio visualizations, Instagram feed integration, and an immersive video background. Built with React, Vite, and TailwindCSS.
 
-## 🚀 Quick Start
+## About
 
-```bash
-npm install
-npm run dev
-```
+This website showcases F3RG13's work as a DJ specializing in UKG, Speed Garage, Bassline, and Funky House. The site features:
 
-Open [http://localhost:5173](http://localhost:5173) in your browser.
+- **Audio-reactive visualizer** — Rainbow frequency bars that animate behind the title when the background video is unmuted
+- **Live Instagram feed** — Automatically fetches and displays recent posts from [@f3rg13.uk](https://www.instagram.com/f3rg13.uk/)
+- **Background video** — Looping video with mute/unmute control
+- **Neon design system** — High-contrast lime green (#C7D900) on dark backgrounds with scanline and grain texture effects
+- **Responsive layout** — Optimized for mobile, tablet, and desktop viewing
 
-## 📦 Build for Production
+## Local Development
 
-```bash
-npm run build
-npm run preview  # Preview the production build
-```
+### Prerequisites
 
-## 🎨 Design System
+- Node.js 20 or higher
+- npm
 
-| Token             | Value     | Usage            |
-| ----------------- | --------- | ---------------- |
-| Background (neon) | `#C7D900` | Page background  |
-| Panel black       | `#0A0A0A` | Text, borders    |
-| Screen panel      | `#151515` | Dark panels      |
-| Accent bright     | `#F0FF00` | Micro-highlights |
+### Setup and Run
 
-### Fonts
+1. **Clone the repository**
 
-- **Display:** Anton, Oswald (Google Fonts)
-- **Body:** Inter (Google Fonts)
+   ```bash
+   git clone https://github.com/mattedgar97/f3rg13.git
+   cd f3rg13
+   ```
 
-## 📁 Project Structure
+2. **Install dependencies**
 
-```
-src/
-├── components/
-│   ├── Header.jsx        # Top bar with glyphs
-│   ├── HeroPanel.jsx     # Main hero with SVG artwork
-│   ├── GlyphRow.jsx      # Four icon panels
-│   ├── HeadlineStack.jsx # DJ name typography
-│   ├── EventsCard.jsx    # Date/venue card
-│   ├── SocialLinks.jsx   # Instagram/SoundCloud/Email
-│   ├── Gallery.jsx       # Image placeholders
-│   └── Footer.jsx        # Copyright bar
-├── constants.js          # ⬅️ EDIT THIS FOR LINKS/NAMES
-├── App.jsx
-├── main.jsx
-└── index.css             # Tailwind + custom effects
-```
+   ```bash
+   npm install
+   ```
 
-## ✏️ Customization Guide
+3. **Start development server**
 
-### 1. Update DJ Info & Social Links
+   ```bash
+   npm run dev
+   ```
 
-Edit `src/constants.js`:
+4. **Open in browser**
 
-```js
-export const SITE_CONFIG = {
-  djName: 'YOUR NAME',
-  tagline: 'YOUR TAGLINE',
-  // ...
-}
+   The site will be available at [http://localhost:5173](http://localhost:5173)
 
-export const SOCIAL_LINKS = {
-  instagram: { url: 'https://instagram.com/yourhandle', label: 'Instagram' },
-  soundcloud: { url: 'https://soundcloud.com/yourname', label: 'SoundCloud' },
-  email: { url: 'mailto:your@email.com', label: 'Booking' },
-}
+### Available Scripts
 
-export const DJ_LINEUP = [
-  { name: 'DJ ONE', subtitle: null },
-  { name: 'DJ TWO', subtitle: '(LIVE)' },
-  // Add/remove as needed
-]
+- `npm run dev` — Start Vite development server with hot reload
+- `npm run build` — Build for production (outputs to `dist/`)
+- `npm run preview` — Preview the production build locally
+- `npm run lint` — Run ESLint to check code quality
+- `npm run format` — Format code with Prettier
 
-export const EVENT_INFO = {
-  date: '31-12-25',
-  time: '10PM - 4AM',
-  venue: 'CLUB NAME',
-  city: 'CITY',
-}
-```
+## Deployment
 
-### 2. Replace Gallery Images
+### GitHub Actions CI/CD Pipeline
 
-Gallery placeholders are in `src/components/Gallery.jsx`. Replace the `<img>` tags:
+The site automatically deploys to GitHub Pages whenever changes are pushed to the `main` branch.
 
-```jsx
-<img
-  src="/assets/your-image.jpg"
-  alt="Description"
-  loading="lazy"
-  className="w-full h-full object-cover rounded-[14px]"
-/>
-```
+**Workflow:** `.github/workflows/deploy.yml`
 
-Put your images in `public/assets/`.
+The pipeline consists of two jobs:
 
-### 3. Adjust Colors
+1. **Build Job**
+   - Checks out the code
+   - Sets up Node.js 20 with npm caching
+   - Installs dependencies with `npm ci`
+   - Builds the production bundle with `npm run build`
+   - Uploads the `dist/` folder as a GitHub Pages artifact
 
-Edit `tailwind.config.js`:
+2. **Deploy Job**
+   - Runs after the build job completes
+   - Deploys the artifact to GitHub Pages
+   - Makes the site available at the configured GitHub Pages URL
 
-```js
-colors: {
-  neon: '#YOUR_COLOR',
-  ink: '#0A0A0A',
-  screen: '#151515',
-}
-```
+**Permissions:** The workflow has read access to repository contents and write access to GitHub Pages.
 
-### 4. Scanline & Grain Intensity
+**Concurrency:** Only one deployment runs at a time; new deployments cancel in-progress ones.
 
-In `src/index.css`:
+### Manual Deployment
 
-- `.scanlines` — adjust `opacity` in animation or background alpha
-- `.grain` — adjust `opacity: 0.06` to taste
-
-## 🎯 Responsive Breakpoints
-
-| Breakpoint | Width      | Layout                                |
-| ---------- | ---------- | ------------------------------------- |
-| Mobile     | < 768px    | Single column, full-width buttons     |
-| Tablet     | 768–1023px | Single column, events below headlines |
-| Desktop    | ≥ 1024px   | Two-column, max-width 1200px          |
-
-## ♿ Accessibility
-
-- All interactive elements are keyboard accessible
-- `aria-label` on social links
-- Semantic HTML (`header`, `main`, `nav`, `footer`, `figure`)
-- Sufficient color contrast
-
-## 🌐 Deployment
-
-### GitHub Pages
+You can also deploy manually using:
 
 ```bash
 npm run deploy
 ```
 
-### Vercel / Netlify
+This builds the site and uses `gh-pages` to push the `dist/` folder to the `gh-pages` branch.
 
-Connect your repo — auto-detects Vite and deploys on push.
+## Project Structure
 
-## 📄 License
+```
+src/
+├── components/
+│   ├── Header.jsx          # Top navigation with mute control
+│   ├── Title.jsx           # Main title with audio visualizer
+│   ├── HeroPanel.jsx       # Background video section
+│   ├── InstagramFeed.jsx   # Instagram post grid
+│   ├── SocialSection.jsx   # Social media links
+│   └── Footer.jsx          # Copyright footer
+├── contexts/
+│   ├── AudioContext.jsx    # Audio context provider
+│   └── AudioContextValue.js # Audio context value
+├── hooks/
+│   └── useAudio.js         # Hook for audio context
+├── constants.js            # Site configuration and links
+├── App.jsx                 # Main app component
+├── main.jsx                # React entry point
+└── index.css               # Global styles and Tailwind
+```
 
-MIT — do whatever you want with it.
+## Technologies
+
+- **React 19** — UI framework
+- **Vite** — Build tool and dev server
+- **TailwindCSS** — Utility-first CSS framework
+- **Web Audio API** — Audio visualization
+- **Instatouch** — Instagram feed integration
+- **GitHub Actions** — CI/CD automation
+- **GitHub Pages** — Static site hosting
 
 ---
 
