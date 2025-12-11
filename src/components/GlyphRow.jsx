@@ -227,7 +227,7 @@ export default function GlyphRow() {
           </div>
 
           {/* Right Column: Audio Visualizer */}
-          <div className="w-full lg:w-1/2 hidden lg:flex">
+          <div className="w-full lg:w-1/2 flex min-h-[300px] lg:min-h-0">
             <div
               ref={containerRef}
               className="relative w-full bg-screen border-2 border-ink rounded-panel overflow-hidden flex-1"

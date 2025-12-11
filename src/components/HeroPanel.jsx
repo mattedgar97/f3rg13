@@ -46,10 +46,15 @@ export default function HeroPanel() {
           muted
           playsInline
           onClick={toggleMute}
-          className="absolute inset-0 w-full h-full object-cover cursor-pointer"
+          className="absolute w-full object-cover cursor-pointer"
           style={{
             zIndex: 0,
             objectPosition: 'center center',
+            top: '-10px',
+            left: 0,
+            right: 0,
+            bottom: 0,
+            height: 'calc(100% + 10px)',
           }}
         >
           <source src={VIDEO_URL} type="video/quicktime" />
