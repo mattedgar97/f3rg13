@@ -28,7 +28,7 @@ export default function Footer() {
 
         {/* Copyright */}
         <p className="text-ink text-xs tracking-widest uppercase font-body">
-          {SITE_CONFIG.copyright} — {SITE_CONFIG.djName}
+          {SITE_CONFIG.copyright} — {SITE_CONFIG.tagline}
         </p>
 
         {/* Bottom glyphs */}

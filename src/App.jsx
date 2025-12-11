@@ -1,10 +1,9 @@
 import Header from './components/Header'
+import Title from './components/Title'
 import HeroPanel from './components/HeroPanel'
 import GlyphRow from './components/GlyphRow'
-import HeadlineStack from './components/HeadlineStack'
-import EventsCard from './components/EventsCard'
+import InstagramFeed from './components/InstagramFeed'
 import SocialLinks from './components/SocialLinks'
-import Gallery from './components/Gallery'
 import Footer from './components/Footer'
 
 function App() {
@@ -21,26 +20,19 @@ function App() {
 
         {/* Main content */}
         <main className="pb-8">
+          {/* Title */}
+          <Title />
+
           {/* Hero Panel */}
           <HeroPanel />
 
           {/* Glyph icons row */}
           <GlyphRow />
 
-          {/* Two-column layout: Headlines + Events */}
+          {/* Instagram Feed - Full width grid of 4 posts */}
           <section className="w-full px-4 lg:px-8 mt-8 lg:mt-12">
             <div className="max-w-site mx-auto">
-              <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 lg:gap-12 items-start">
-                {/* Left: Headline stack (60%) */}
-                <div className="lg:pr-8">
-                  <HeadlineStack />
-                </div>
-
-                {/* Right: Events card (40%) */}
-                <div className="w-full lg:w-80">
-                  <EventsCard />
-                </div>
-              </div>
+              <InstagramFeed />
             </div>
           </section>
 
@@ -49,11 +41,6 @@ function App() {
             <div className="max-w-site mx-auto">
               <SocialLinks />
             </div>
-          </section>
-
-          {/* Gallery */}
-          <section className="mt-12 lg:mt-16">
-            <Gallery />
           </section>
         </main>
 

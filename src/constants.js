@@ -1,39 +1,31 @@
 // Editable constants for social links and site info
 // Change these values to customize your DJ portfolio
 
+export const COLORS = {
+  primary: '#C7D900',
+  primaryBright: '#F0FF00',
+  ink: '#0A0A0A',
+  screen: '#151515',
+}
+
 export const SITE_CONFIG = {
   djName: 'F3RG13',
-  tagline: 'ARE WE GOING OUT TONIGHT?',
-  taglineRight: 'XLR',
+  tagline: 'ELIZA FERGUSON',
+  taglineRight: 'LIVERPOOL / MANCHESTER / THE WORLD',
   copyright: `© ${new Date().getFullYear()} F3RG13`,
 }
 
 export const SOCIAL_LINKS = {
   instagram: {
-    url: '#',
+    url: 'https://www.instagram.com/f3rg13.uk/',
     label: 'Instagram',
   },
   soundcloud: {
-    url: '#',
+    url: 'https://soundcloud.com/elizaferguson',
     label: 'SoundCloud',
   },
   email: {
-    url: 'mailto:booking@f3rg13.com',
-    label: 'Booking',
+    url: 'mailto:eliza.f3rg13@gmail.com',
+    label: 'Email',
   },
-}
-
-export const DJ_LINEUP = [
-  { name: 'SULPHUR', subtitle: null },
-  { name: 'AWGOT', subtitle: '(DJ SET)' },
-  { name: 'THEO SHELDRAKE', subtitle: null },
-  { name: 'F3RG13', subtitle: null },
-  { name: 'DEXXTER', subtitle: null },
-]
-
-export const EVENT_INFO = {
-  date: '09-10-25',
-  time: '10PM - 2AM',
-  venue: 'XLR',
-  city: 'MCR',
 }
