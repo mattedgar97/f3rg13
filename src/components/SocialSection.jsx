@@ -11,6 +11,11 @@ export default function SocialSection() {
       size: 'text-5xl lg:text-7xl',
     },
     {
+      name: 'MIXCLOUD',
+      url: 'https://www.mixcloud.com/elizaferguson/',
+      size: 'text-5xl lg:text-7xl',
+    },
+    {
       name: 'EMAIL',
       url: 'mailto:eliza.f3rg13@gmail.com',
       size: 'text-5xl lg:text-7xl',

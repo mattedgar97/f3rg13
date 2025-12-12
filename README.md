@@ -6,10 +6,10 @@ A neon-styled DJ portfolio website for Eliza Ferguson (F3RG13), featuring a bold
 
 This website showcases F3RG13's work as a DJ specializing in UKG, Speed Garage, Bassline, and Funky House. The site features:
 
-- **Audio-reactive visualizer** — Rainbow frequency bars that animate behind the title when the background video is unmuted
+- **Audio-reactive visualizer** — Frequency bars that animate behind the title when the background video is unmuted
 - **Live Instagram feed** — Automatically fetches and displays recent posts from [@f3rg13.uk](https://www.instagram.com/f3rg13.uk/)
 - **Background video** — Looping video with mute/unmute control
-- **Neon design system** — High-contrast lime green (#C7D900) on dark backgrounds with scanline and grain texture effects
+- **Neon design system** — High-contrast styling with scanline and grain texture effects
 - **Responsive layout** — Optimized for mobile, tablet, and desktop viewing
 
 ## Local Development
@@ -122,4 +122,4 @@ src/
 
 ---
 
-Built with 🖤 and neon green.
+Built with 🖤 and neon vibes.

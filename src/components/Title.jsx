@@ -80,7 +80,7 @@ export default function Title() {
         // Use only height for radius to maintain circle proportions
         const maxRadius = canvas.height * 0.35
 
-        ctx.strokeStyle = '#C7D900'
+        ctx.strokeStyle = '#00FFFF'
         ctx.lineWidth = 3
         ctx.globalAlpha = 0.2
 
@@ -109,48 +109,11 @@ export default function Title() {
           const barWidth = (canvas.width / bufferLength) * 2.5
           let x = 0
 
-          // Extensive rainbow neon colors - each bar gets its own unique color
-          const rainbowColors = [
-            ['#FF0080', '#FF00FF'], // Hot pink to magenta
-            ['#FF0040', '#FF0099'], // Deep pink
-            ['#9D00FF', '#C77DFF'], // Purple to lavender
-            ['#7209B7', '#B088F9'], // Deep purple to light purple
-            ['#560BAD', '#9D4EDD'], // Indigo to violet
-            ['#3F37C9', '#6C63FF'], // Royal blue
-            ['#4361EE', '#4CC9F0'], // Blue to cyan
-            ['#4895EF', '#72EFDD'], // Sky blue to turquoise
-            ['#00F5FF', '#00FFFF'], // Cyan
-            ['#06FFA5', '#5FFBF1'], // Aqua to mint
-            ['#00FF88', '#7FFFD4'], // Green cyan
-            ['#39FF14', '#ADFF2F'], // Neon green to yellow-green
-            ['#CCFF00', '#F0FF00'], // Chartreuse to neon yellow
-            ['#FFEA00', '#FFD000'], // Yellow
-            ['#FFD60A', '#FFC300'], // Gold
-            ['#FFC100', '#FF9500'], // Amber to orange
-            ['#FF9E00', '#FF6D00'], // Orange
-            ['#FF6B00', '#FF3D00'], // Deep orange to red-orange
-            ['#FF4500', '#FF0040'], // Orange-red to hot red
-            ['#FF006E', '#FF1744'], // Neon red to crimson
-          ]
-
           for (let i = 0; i < bufferLength; i++) {
             const barHeight = (dataArray[i] / 255) * canvas.height
 
-            // Each bar gets a unique color from the array
-            const colorIndex = i % rainbowColors.length
-            const colors = rainbowColors[colorIndex]
-
-            // Rainbow gradient from dark at bottom to bright at top
-            const gradient = ctx.createLinearGradient(
-              0,
-              canvas.height - barHeight,
-              0,
-              canvas.height
-            )
-            gradient.addColorStop(0, colors[0])
-            gradient.addColorStop(1, colors[1])
-
-            ctx.fillStyle = gradient
+            // White bars
+            ctx.fillStyle = '#FFFFFF'
             ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight)
 
             x += barWidth + 1
