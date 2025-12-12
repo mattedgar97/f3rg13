@@ -74,31 +74,6 @@ export default function Title() {
         ctx.fillStyle = '#151515'
         ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-        // Always draw concentric circles in background
-        const centerX = canvas.width / 2
-        const centerY = canvas.height / 2
-        // Use only height for radius to maintain circle proportions
-        const maxRadius = canvas.height * 0.35
-
-        ctx.strokeStyle = '#00FFFF'
-        ctx.lineWidth = 3
-        ctx.globalAlpha = 0.2
-
-        // Draw three concentric circles
-        ctx.beginPath()
-        ctx.arc(centerX, centerY, maxRadius, 0, Math.PI * 2)
-        ctx.stroke()
-
-        ctx.beginPath()
-        ctx.arc(centerX, centerY, maxRadius * 0.65, 0, Math.PI * 2)
-        ctx.stroke()
-
-        ctx.beginPath()
-        ctx.arc(centerX, centerY, maxRadius * 0.35, 0, Math.PI * 2)
-        ctx.stroke()
-
-        ctx.globalAlpha = 1
-
         // Check if video is muted or audio is very low
         const isMuted = videoElement.muted
         const avgVolume =
