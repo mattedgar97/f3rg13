@@ -17,6 +17,7 @@ export default {
           'system-ui',
           'sans-serif',
         ],
+        hero: ['ScrambleStorm', 'Anton', 'system-ui', 'sans-serif'],
         body: [
           'Inter',
           'system-ui',

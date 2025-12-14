@@ -135,7 +135,7 @@ export default function Title() {
           <div className="relative z-10">
             {/* Main title */}
             <h1
-              className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl tracking-tight leading-none text-neon uppercase"
+              className="font-hero text-8xl sm:text-9xl md:text-[10rem] lg:text-[12rem] tracking-tight leading-none text-neon uppercase"
               style={{
                 WebkitTextStroke: '2px #0A0A0A',
                 paintOrder: 'stroke fill',
