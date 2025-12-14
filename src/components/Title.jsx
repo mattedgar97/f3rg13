@@ -81,7 +81,7 @@ export default function Title() {
 
         // Draw frequency bars on top if there's audio
         if (!isMuted && avgVolume >= 5) {
-          const barWidth = (canvas.width / bufferLength) * 2.5
+          const barWidth = (canvas.width / bufferLength) * 2.0
           let x = 0
 
           for (let i = 0; i < bufferLength; i++) {
