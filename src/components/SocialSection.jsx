@@ -79,7 +79,7 @@ export default function SocialSection() {
           </div>
 
           {/* Image Carousel - fills remaining space */}
-          <div className="w-full lg:flex-1 lg:-mt-2 flex justify-end">
+          <div className="w-full lg:flex-1 lg:-mt-2 flex justify-start lg:justify-end">
             <div className="neon-panel p-4 relative w-full max-w-xs">
               {/* Carousel container */}
               <div className="relative w-full aspect-square overflow-hidden rounded-lg bg-screen">
