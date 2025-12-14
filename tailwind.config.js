@@ -4,8 +4,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        neon: '#00FFFF',
-        'neon-bright': '#7FFFD4',
+        neon: '#9e063b',
+        'neon-bright': '#c71858',
         ink: '#0A0A0A',
         screen: '#151515',
       },

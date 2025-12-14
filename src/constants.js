@@ -2,8 +2,8 @@
 // Change these values to customize your DJ portfolio
 
 export const COLORS = {
-  primary: '#00FFFF',
-  primaryBright: '#7FFFD4',
+  primary: '#9e063b',
+  primaryBright: '#c71858',
   ink: '#0A0A0A',
   screen: '#151515',
 }
