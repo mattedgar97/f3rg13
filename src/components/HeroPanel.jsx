@@ -61,10 +61,25 @@ export default function HeroPanel() {
           Your browser does not support the video tag.
         </video>
 
-        {/* Mute/Unmute indicator */}
+        {/* Optional dark overlay to improve visibility */}
+        <div
+          className="absolute inset-0 bg-ink/30 pointer-events-none"
+          style={{ zIndex: 1 }}
+        />
+
+        {/* Grain overlay for the panel */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.08] mix-blend-multiply"
+          style={{
+            zIndex: 2,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+          }}
+        />
+
+        {/* Mute/Unmute button - bottom right corner */}
         <button
           onClick={toggleMute}
-          className="absolute top-4 right-4 z-10 bg-ink/80 border-2 border-neon text-neon px-4 py-2 font-display text-sm uppercase tracking-wider hover:bg-neon hover:text-ink transition-all duration-200 cursor-pointer"
+          className="absolute bottom-4 right-4 z-10 bg-ink/90 border-2 border-neon text-neon px-4 py-2 font-display text-sm uppercase tracking-wider hover:bg-neon hover:text-ink transition-all duration-200 cursor-pointer"
           aria-label={isMuted ? 'Unmute video' : 'Mute video'}
         >
           {isMuted ? (
@@ -91,21 +106,6 @@ export default function HeroPanel() {
             </span>
           )}
         </button>
-
-        {/* Optional dark overlay to improve visibility */}
-        <div
-          className="absolute inset-0 bg-ink/30 pointer-events-none"
-          style={{ zIndex: 1 }}
-        />
-
-        {/* Grain overlay for the panel */}
-        <div
-          className="absolute inset-0 pointer-events-none opacity-[0.08] mix-blend-multiply"
-          style={{
-            zIndex: 2,
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-          }}
-        />
       </div>
     </section>
   )
