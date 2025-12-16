@@ -4,6 +4,7 @@ import HeroPanel from './components/HeroPanel'
 import SocialSection from './components/SocialSection'
 import InstagramFeed from './components/InstagramFeed'
 import Footer from './components/Footer'
+import AudioVisualizer from './components/AudioVisualizer'
 import { AudioProvider } from './contexts/AudioContext'
 
 function App() {
@@ -20,11 +21,13 @@ function App() {
 
         {/* Main content */}
         <main className="pb-8">
-          {/* Title */}
-          <Title />
-
-          {/* Hero Panel */}
-          <HeroPanel />
+          {/* Hero Panel with Title overlay */}
+          <div className="relative">
+            <HeroPanel />
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <Title />
+            </div>
+          </div>
 
           {/* Glyph icons row */}
           <SocialSection />
@@ -37,8 +40,11 @@ function App() {
           </section>
         </main>
 
-        {/* Footer */}
-        <Footer />
+        {/* Footer with Audio Visualizer behind it */}
+        <div className="relative">
+          <AudioVisualizer />
+          <Footer />
+        </div>
       </div>
     </AudioProvider>
   )

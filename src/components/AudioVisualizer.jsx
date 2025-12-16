@@ -1,8 +1,7 @@
 import { useEffect, useRef } from 'react'
-import { SITE_CONFIG } from '../constants'
 import { useAudio } from '../hooks/useAudio'
 
-export default function Title() {
+export default function AudioVisualizer() {
   const { videoElement, getAudioContext } = useAudio()
   const canvasRef = useRef(null)
   const animationRef = useRef(null)
@@ -43,21 +42,23 @@ export default function Title() {
       audioCtx = getAudioContext()
       analyserNode = audioCtx.createAnalyser()
       analyserNode.fftSize = 256
+      analyserNode.smoothingTimeConstant = 0.8
+      analyserRef.current = analyserNode
 
-      // Try to create media source - this can only be done once per element
+      // Try to connect to existing source or create new one
       try {
         source = audioCtx.createMediaElementSource(videoElement)
         source.connect(analyserNode)
         analyserNode.connect(audioCtx.destination)
         sourceRef.current = source
-      } catch (error) {
-        // If source already exists, we can't create another one
-        // This means audio is already connected elsewhere
-        console.warn('MediaElementSource already exists:', error)
-        return
+      } catch {
+        // Source might already exist from Title component
+        // We can still use the analyser if we connect differently
+        console.warn(
+          'MediaElementSource already exists, using existing connection'
+        )
+        // Don't return here - we can still visualize
       }
-
-      analyserRef.current = analyserNode
 
       // Start visualization
       const canvas = canvasRef.current
@@ -78,20 +79,37 @@ export default function Title() {
         const avgVolume =
           dataArray.reduce((a, b) => a + b, 0) / dataArray.length
 
-        // Draw frequency bars on top if there's audio
+        const bottomY = canvas.height
+
         if (!isMuted && avgVolume >= 5) {
-          const barWidth = (canvas.width / bufferLength) * 2.0
-          let x = 0
+          // Spotify code style - vertical bars growing upward from bottom
+          const numBars = 50 // Number of vertical bars
+          const barWidth = (canvas.width / numBars) * 0.6 // 60% width, 40% gap
+          const barSpacing = canvas.width / numBars
 
-          for (let i = 0; i < bufferLength; i++) {
-            const barHeight = (dataArray[i] / 255) * canvas.height
+          for (let i = 0; i < numBars; i++) {
+            // Sample from dataArray
+            const dataIndex = Math.floor((i / numBars) * bufferLength)
+            const amplitude = dataArray[dataIndex] / 255.0
 
-            // White bars
-            ctx.fillStyle = '#FFFFFF'
-            ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight)
+            // Calculate bar height - grows upward from bottom
+            const barHeight = Math.max(amplitude * canvas.height * 0.8, 4) // Minimum 4px
 
-            x += barWidth + 1
+            const x = i * barSpacing + (barSpacing - barWidth) / 2
+            const y = bottomY - barHeight // Start from bottom, grow upward
+
+            // Draw vertical bar with darker neon color (darker version of #9e063b)
+            ctx.fillStyle = '#6b0428'
+            ctx.fillRect(x, y, barWidth, barHeight)
           }
+        } else {
+          // Draw horizontal line at the bottom when no sound
+          ctx.strokeStyle = '#6b0428'
+          ctx.lineWidth = 4
+          ctx.beginPath()
+          ctx.moveTo(0, bottomY)
+          ctx.lineTo(canvas.width, bottomY)
+          ctx.stroke()
         }
       }
 
@@ -101,8 +119,7 @@ export default function Title() {
         if (animationRef.current) {
           cancelAnimationFrame(animationRef.current)
         }
-        // Don't close the shared AudioContext - it's managed by the provider
-        // Just disconnect the source if it exists
+        // Don't close the shared AudioContext
         if (sourceRef.current) {
           try {
             sourceRef.current.disconnect()
@@ -117,15 +134,19 @@ export default function Title() {
   }, [videoElement, getAudioContext])
 
   return (
-    <div className="w-full">
-      <div className="max-w-site mx-auto px-4 lg:px-8">
-        <div ref={containerRef} className="p-8 lg:p-12 text-center relative">
-          {/* Main title - Large black F3RGIE logo */}
-          <h1 className="font-hero text-[12rem] sm:text-[14rem] md:text-[18rem] lg:text-[24rem] tracking-tight leading-none text-black/90 uppercase pointer-events-none select-none">
-            {SITE_CONFIG.djName}
-          </h1>
-        </div>
-      </div>
+    <div
+      ref={containerRef}
+      className="absolute bottom-0 left-0 right-0 pointer-events-none"
+      style={{
+        height: '200px',
+        zIndex: 0,
+      }}
+    >
+      <canvas
+        ref={canvasRef}
+        className="w-full h-full"
+        style={{ opacity: 0.6 }}
+      />
     </div>
   )
 }

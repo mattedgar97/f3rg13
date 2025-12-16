@@ -50,7 +50,7 @@ export default function SocialSection() {
   }
 
   return (
-    <div className="w-full px-4 lg:px-8 mt-6 lg:mt-8">
+    <div className="w-full px-4 lg:px-8 mt-8 lg:mt-12">
       <div className="max-w-site mx-auto">
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
           {/* Social Link Buttons */}
@@ -80,7 +80,7 @@ export default function SocialSection() {
 
           {/* Image Carousel - fills remaining space */}
           <div className="w-full lg:flex-1 lg:-mt-2 flex justify-center lg:justify-end">
-            <div className="neon-panel p-4 relative w-full max-w-sm lg:max-w-xs">
+            <div className="neon-panel p-4 relative w-full lg:max-w-xs">
               {/* Carousel container */}
               <div className="relative w-full aspect-square overflow-hidden rounded-lg bg-screen">
                 {/* Images */}
