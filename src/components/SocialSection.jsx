@@ -79,7 +79,7 @@ export default function SocialSection() {
                       strokeWidth={2.5}
                     />
                     <h2
-                      className={`${social.size} font-display font-black uppercase text-ink hover:underline transition-all duration-200 tracking-wide`}
+                      className={`${social.size} font-display font-black uppercase text-ink transition-all duration-200 tracking-wide`}
                       style={{
                         lineHeight: '0.95',
                         letterSpacing: '-0.01em',
