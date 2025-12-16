@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Instagram, Cloud, Radio, Mail } from 'lucide-react'
 
 export default function SocialSection() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
@@ -8,21 +9,25 @@ export default function SocialSection() {
       name: 'INSTAGRAM',
       url: 'https://www.instagram.com/f3rg13.uk/',
       size: 'text-5xl lg:text-7xl',
+      icon: Instagram, // Deprecated icon but I don't care
     },
     {
       name: 'SOUNDCLOUD',
       url: 'https://soundcloud.com/elizaferguson',
       size: 'text-5xl lg:text-7xl',
+      icon: Cloud,
     },
     {
       name: 'MIXCLOUD',
       url: 'https://www.mixcloud.com/elizaferguson/',
       size: 'text-5xl lg:text-7xl',
+      icon: Radio,
     },
     {
       name: 'EMAIL',
       url: 'mailto:eliza.f3rg13@gmail.com',
       size: 'text-5xl lg:text-7xl',
+      icon: Mail,
     },
   ]
 
@@ -55,27 +60,37 @@ export default function SocialSection() {
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
           {/* Social Link Buttons */}
           <div className="w-full lg:flex-1 space-y-3 lg:space-y-4">
-            {socialButtons.map((social, i) => (
-              <a
-                key={i}
-                href={social.url}
-                target={social.name !== 'EMAIL' ? '_blank' : undefined}
-                rel={
-                  social.name !== 'EMAIL' ? 'noopener noreferrer' : undefined
-                }
-                className="block"
-              >
-                <h2
-                  className={`${social.size} font-display font-black uppercase text-ink hover:underline transition-all duration-200 tracking-wide`}
-                  style={{
-                    lineHeight: '0.95',
-                    letterSpacing: '-0.01em',
-                  }}
+            {socialButtons.map((social, i) => {
+              const Icon = social.icon
+              return (
+                <a
+                  key={i}
+                  href={social.url}
+                  target={social.name !== 'EMAIL' ? '_blank' : undefined}
+                  rel={
+                    social.name !== 'EMAIL' ? 'noopener noreferrer' : undefined
+                  }
+                  className="block"
                 >
-                  {social.name}
-                </h2>
-              </a>
-            ))}
+                  <div className="flex items-center gap-3 lg:gap-4">
+                    <Icon
+                      className="text-ink flex-shrink-0"
+                      size={48}
+                      strokeWidth={2.5}
+                    />
+                    <h2
+                      className={`${social.size} font-display font-black uppercase text-ink hover:underline transition-all duration-200 tracking-wide`}
+                      style={{
+                        lineHeight: '0.95',
+                        letterSpacing: '-0.01em',
+                      }}
+                    >
+                      {social.name}
+                    </h2>
+                  </div>
+                </a>
+              )
+            })}
           </div>
 
           {/* Image Carousel - fills remaining space */}
