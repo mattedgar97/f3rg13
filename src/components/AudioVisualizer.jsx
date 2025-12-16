@@ -45,19 +45,16 @@ export default function AudioVisualizer() {
       analyserNode.smoothingTimeConstant = 0.8
       analyserRef.current = analyserNode
 
-      // Try to connect to existing source or create new one
+      // Connect to audio source
       try {
         source = audioCtx.createMediaElementSource(videoElement)
         source.connect(analyserNode)
         analyserNode.connect(audioCtx.destination)
         sourceRef.current = source
       } catch {
-        // Source might already exist from Title component
-        // We can still use the analyser if we connect differently
-        console.warn(
-          'MediaElementSource already exists, using existing connection'
-        )
-        // Don't return here - we can still visualize
+        // MediaElementSource can only be created once per element
+        console.warn('MediaElementSource already exists')
+        return
       }
 
       // Start visualization
@@ -82,28 +79,24 @@ export default function AudioVisualizer() {
         const bottomY = canvas.height
 
         if (!isMuted && avgVolume >= 5) {
-          // Spotify code style - vertical bars growing upward from bottom
-          const numBars = 50 // Number of vertical bars
-          const barWidth = (canvas.width / numBars) * 0.6 // 60% width, 40% gap
+          // Vertical bars growing upward from bottom when audio is playing
+          const numBars = 50
+          const barWidth = (canvas.width / numBars) * 0.6
           const barSpacing = canvas.width / numBars
 
           for (let i = 0; i < numBars; i++) {
-            // Sample from dataArray
             const dataIndex = Math.floor((i / numBars) * bufferLength)
             const amplitude = dataArray[dataIndex] / 255.0
-
-            // Calculate bar height - grows upward from bottom
-            const barHeight = Math.max(amplitude * canvas.height * 0.8, 4) // Minimum 4px
+            const barHeight = Math.max(amplitude * canvas.height * 0.8, 4)
 
             const x = i * barSpacing + (barSpacing - barWidth) / 2
-            const y = bottomY - barHeight // Start from bottom, grow upward
+            const y = bottomY - barHeight
 
-            // Draw vertical bar with darker neon color (darker version of #9e063b)
             ctx.fillStyle = '#6b0428'
             ctx.fillRect(x, y, barWidth, barHeight)
           }
         } else {
-          // Draw horizontal line at the bottom when no sound
+          // Horizontal line when muted or no audio
           ctx.strokeStyle = '#6b0428'
           ctx.lineWidth = 4
           ctx.beginPath()
@@ -119,7 +112,6 @@ export default function AudioVisualizer() {
         if (animationRef.current) {
           cancelAnimationFrame(animationRef.current)
         }
-        // Don't close the shared AudioContext
         if (sourceRef.current) {
           try {
             sourceRef.current.disconnect()

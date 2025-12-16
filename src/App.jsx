@@ -29,10 +29,10 @@ function App() {
             </div>
           </div>
 
-          {/* Glyph icons row */}
+          {/* Social links and image carousel */}
           <SocialSection />
 
-          {/* Instagram Feed - Full width grid of 4 posts */}
+          {/* Instagram Feed */}
           <section className="w-full px-4 lg:px-8 mt-8 lg:mt-12">
             <div className="max-w-site mx-auto">
               <InstagramFeed />
